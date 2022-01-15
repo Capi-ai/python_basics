@@ -7,6 +7,7 @@
 # function or another
 
 import argparse
+from datetime import datetime
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--operation", "-op", required=True,
@@ -17,6 +18,10 @@ ap.add_argument("--num2", "-n2", required=True,
              help="Enter second number involved in operation")
 args = vars(ap.parse_args())
 
+# Decorator. Display information of the operation
+def dispInfo(fun):
+    print("Execution time : ", datetime.now())
+    return fun
 
 def create_action(op,num1):
     
@@ -34,7 +39,7 @@ def create_action(op,num1):
 
     return eval(op)
 
-
+@dispInfo
 def main(operation,number1,number2):
     switcher = {
                "add"    : "adder",
